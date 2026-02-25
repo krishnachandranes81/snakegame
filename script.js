@@ -386,7 +386,7 @@ class Game {
         const addControl = (btn, key) => {
             const trigger = (e) => {
                 e.preventDefault(); // Prevents double firing from mouse events later or scrolling
-                this.handleInput({ key: key });
+                this.handleInput({ key: key, preventDefault: () => { } });
             };
             btn.addEventListener('touchstart', trigger, { passive: false });
             btn.addEventListener('mousedown', trigger); // Fallback for clicking UI with mouse
