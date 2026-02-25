@@ -181,6 +181,12 @@ class UIController {
         this.finalScoreDisplay = document.getElementById('final-score');
         this.restartBtn = document.getElementById('restart-btn');
 
+        // Mobile Controls
+        this.btnUp = document.getElementById('btn-up');
+        this.btnDown = document.getElementById('btn-down');
+        this.btnLeft = document.getElementById('btn-left');
+        this.btnRight = document.getElementById('btn-right');
+
         // System styling extraction (allows CSS theming to control canvas styling transparently)
         this.styles = getComputedStyle(document.documentElement);
     }
@@ -366,12 +372,30 @@ class Game {
     bindEvents() {
         // Setup UI listener
         this.ui.restartBtn.addEventListener('click', () => {
-            this.reset();
-            this.start();
+            if (this.state === 'GAMEOVER') {
+                this.reset();
+                this.start();
+            }
         });
 
         // Setup Keyboard listeners
         window.addEventListener('keydown', (e) => this.handleInput(e));
+
+        // Setup Mobile Touch Listeners 
+        // We use touchstart to prevent 300ms click delay on some mobile devices and make controls snappy
+        const addControl = (btn, key) => {
+            const trigger = (e) => {
+                e.preventDefault(); // Prevents double firing from mouse events later or scrolling
+                this.handleInput({ key: key });
+            };
+            btn.addEventListener('touchstart', trigger, { passive: false });
+            btn.addEventListener('mousedown', trigger); // Fallback for clicking UI with mouse
+        };
+
+        addControl(this.ui.btnUp, 'ArrowUp');
+        addControl(this.ui.btnDown, 'ArrowDown');
+        addControl(this.ui.btnLeft, 'ArrowLeft');
+        addControl(this.ui.btnRight, 'ArrowRight');
     }
 
     handleInput(e) {

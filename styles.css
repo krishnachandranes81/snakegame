@@ -30,6 +30,7 @@ body {
     align-items: center;
     min-height: 100vh;
     overflow: hidden; /* Prevent scrolling down with arrow keys fallback */
+    touch-action: none; /* Prevent browser zooming and panning on mobile */
 }
 
 .game-wrapper {
@@ -167,6 +168,44 @@ canvas {
     line-height: 1.5;
 }
 
+/* Mobile Controls */
+.mobile-controls {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.mobile-controls .row {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.ctrl-btn {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 0.5rem;
+    border: none;
+    background-color: var(--board-border);
+    color: var(--text-main);
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.ctrl-btn:active,
+.ctrl-btn:focus {
+    background-color: var(--accent);
+    transform: scale(0.95);
+    outline: none;
+}
+
 /* Responsiveness */
 @media (max-width: 480px) {
     .game-wrapper {
@@ -174,6 +213,14 @@ canvas {
         border-radius: 0;
         height: 100vh;
         justify-content: center;
+    }
+    
+    .mobile-controls {
+        display: flex;
+    }
+    
+    .controls-hint {
+        display: none; /* Hide text directions on mobile */
     }
     
     .canvas-container {
