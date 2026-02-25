@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Snake Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="game-wrapper">
+        <header class="game-header">
+            <h1>Snake Game</h1>
+            <div class="score-board">
+                <div class="score-card">
+                    <span class="label">Score</span>
+                    <span id="current-score" class="value">0</span>
+                </div>
+                <div class="score-card">
+                    <span class="label">Best</span>
+                    <span id="high-score" class="value">0</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="canvas-container">
+            <!-- Using a 400x400 canvas mapping to 20x20 grid -->
+            <canvas id="game-canvas" width="400" height="400"></canvas>
+            
+            <div id="game-overlay" class="overlay hidden">
+                <h2 id="overlay-title">Game Over!</h2>
+                <div class="final-score-display">
+                    Score: <span id="final-score">0</span>
+                </div>
+                <button id="restart-btn" class="primary-btn">Play Again</button>
+            </div>
+        </main>
+
+        <footer class="controls-hint">
+            <p>Use <strong>Arrow Keys</strong> or <strong>W, A, S, D</strong> to move.</p>
+            <p>Press any direction key to start.</p>
+        </footer>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
